@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style> 
+    .modgash{
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+</style> <!--although it's better to create separate file CSS-->
+
+<body dir="rtl"> <!--changes direction-->
+    <label>שער דולר יציג: <input id='shaar'></label> <!--places input-->
+    <br>
+    <label>סכום בדולרים: <input id="amount"></label> <!--places input-->
+    <br>
+    <button onclick="d2s();">כמה שקלים זה?</button> <!--adds function-->
+    
+    
+    <br><br>
+    <h3> רשימת תזכורות</h3> <!--making a list-->
+    <div id="LIST">
+        <ul>
+            <li id="LI1"> להשלים את התרגיל</li>
+            <li id="LI2"> לנוח</li>
+            <li id="LI3"> להתרגל לשעון חורף</li>
+            <li id="LI4"> לשמוע מוזיקה</li>
+        </ul>
+    </div>
+    <label> מספר פריט (מספר שלם): <input id="list_num"> </label> <!--places input-->
+    <br>
+    <button onclick="note();"> סמן כחשוב</button> <!--adds function-->
+    <br><br>
+
+    <textarea id="txtarea"> </textarea> <!--opens text area for input-->
+    <br>
+    <button onclick="dotext();"> Do Text()</button> <button onclick="dohtml()"> Do HTML()</button> 
+    <button onclick="doreminders();"> הבא התזכורות</button><!--creates buttons with different functions-->
+    <br>
+    <div id="prntarea"> </div> <!--shows place to print output-->
+
+
+
+    <script>
+        function d2s(){
+            let dollars=document.getElementById("amount").value; // takes the value
+            dollars=parseFloat(dollars); // converts to number
+            let rate=document.getElementById("shaar").value; // takes shaar (input)
+            rate=parseFloat(rate); // converts it as well
+
+            let shekel_amount=rate*dollars; // convertation to shekel
+
+            // let print_string="סכום של " + dollars + " דולרים שווה " + shekel_amount; // prints the message (the 1st way)
+            let print_string=`סכום של ${dollars} דולרים שווה ${shekel_amount.toFixed(2)} שקלים`; // prints the message (the 2st way)
+            alert(print_string); // creates popup
+        }
+
+        function note(){
+            let list_num=document.getElementById("list_num").value; // takes the value
+            let li_id="LI" + list_num; // creates an ID that needs to be highlighted
+            //document.getElementById(li_id).classList.add("modgash"); // adds style to the element with that ID
+            document.getElementById(li_id).classList.toggle("modgash"); // checks if the style exists and based on that adds or removes it
+        }
+
+        function dotext(){
+            let this_text=document.getElementById("txtarea").value; // takes the value 
+            document.getElementById("prntarea").innerText=this_text; // prints as a text
+        }
+
+        function dohtml(){
+            let this_text=document.getElementById("txtarea").value; // takes the value
+            document.getElementById("prntarea").innerHTML=this_text; // prints as text with HTML tags
+        }
+        
+        function doreminders(){
+            let list=document.getElementById("LIST").innerHTML;
+            // document.getElementById("txtarea").innerText=list; // the first option, shows content in a row (I didn't like it)
+            document.getElementById("txtarea").innerHTML=list; // the second option, makes it more organized
+        }
+    </script>
+</body>
+</html>

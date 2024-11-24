@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://lemida.biu.ac.il/pluginfile.php/3573668/mod_resource/content/1/targil3strtr1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>targil3 starter</title>
+</head>
+<body>
+    <h1> Contact Form</h1> <!--next we create a document-->
+    <label for="name">Name: </label>
+    <input id="name">
+    <br><br>
+    <label for="email">Email:</label>
+    <input id="email">
+    <br><br>
+    <label for="msg">Message:</label>
+    <textarea id="msg"></textarea>
+    <br><br>
+    <button onclick="submit();">Submit</button> <!--adds onclick button-->
+
+    <br><br><br>
+    <button onclick="display();">Output Contact</button> <!--adds onclick button-->
+    <button onclick="clearMsg();">Clear</button> <!--adds onclick button-->
+    <div id="message"></div> <!--marks the place for the output-->
+    
+
+    <script>
+       let name, email, message;
+       let was_output=false; // creates a test for the desired behavior
+
+       function submit(){
+        name=document.getElementById('name').value; // gets the value
+        email=document.getElementById('email').value; // gets the value
+        message=document.getElementById('msg').value; // gets the value
+        //console.log(name); // test
+        //console.log(email); // test
+        //console.log(message); // test
+        if (was_output){
+            display(); // updates output if it has already been printed
+        }
+       }
+
+       function display(){
+        let full_string=""; // resets a variable
+        full_string+="Name: "+name+"\n"; // creats a message by connecting input variables
+        full_string+="Email: "+email+"\n";
+        full_string+="Message: "+message;
+        document.getElementById('message').innerText=full_string;
+        was_output=true; // marks if printed
+       }
+
+       function clearMsg(){ // "clear" didn't work because it's special word
+            document.getElementById('name').value="";
+            document.getElementById('email').value="";
+            document.getElementById('msg').value="";
+            document.getElementById('message').innerText="";
+            was_output=false;
+       }
+
+    </script>
+
+</body></html>

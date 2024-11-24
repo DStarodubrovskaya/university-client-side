@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>targil kita 1</title>  
+</head>
+<body dir="rtl">
+   הזן קלט:
+    <input id=tx1 value="" /><br />
+    <button id=btn1 onclick="clean();">נקה </button> 
+    <button id=btn2 onclick="identify1()"> זהה סוג 1 </button> 
+    <button id=btn3 onclick="identify2()">זהה סוג 2 </button> 
+    <button id=btn4 onclick="identify_advance()">זהה סוג מתקדם </button>
+    <hr/>
+    <div id=rslt>
+    </div>
+    <script>
+        function clean() {
+            document.getElementById("tx1").value="";
+            document.getElementById("rslt").innerText="";
+            /* console.log('my job 1'); // הדפסה בקונסול
+            мы отменили печать в консоли и добавили указание, что
+            "всё что написано в קלט равно пустой строке" */
+        }
+        // הוספת אירועי הקלקה
+        // добавили "onclick" в кнопки
+        function identify1(){
+            let x=document.getElementById("tx1").value; // считали input
+            if (x==""){
+                document.getElementById("rslt").innerText="חסר נתון הקלט"
+                document.getElementById("tx1").focus()
+            } // проверка на отсутствие input
+            else if (x != x.trim()) {
+                document.getElementById("rslt").innerText="הזן ערך ללא רווחים"
+                document.getElementById("tx1").focus()
+            } // проверка на наличие пробелов
+            else if (isNaN(x)) {
+                document.getElementById("rslt").innerText="לא הוזן מספר";
+                document.getElementById("tx1").focus()
+            } // если не число
+            else {
+                document.getElementById("rslt").innerText="הוזן מספר";
+            } // если число
+            // console.log('my job 2');
+        }
+        function identify2(){
+            let x=document.getElementById("tx1").value; // считали input
+            if (x==""){
+                document.getElementById("rslt").innerText="חסר נתון הקלט"
+                document.getElementById("tx1").focus()
+            } // проверка на отсутствие input
+            else if (x != x.trim()) {
+                document.getElementById("rslt").innerText="הזן ערך ללא רווחים"
+                document.getElementById("tx1").focus()
+            } // проверка на наличие пробелов
+            else if (isNaN(x)) {
+                document.getElementById("rslt").innerText="לא הוזן מספר";
+                document.getElementById("tx1").focus()
+            } // если не число
+            else if (parseInt(x) % 2 == 0) {
+                document.getElementById("rslt").innerText="הוזן מספר זוגי";
+            } // если четное
+            else {
+                document.getElementById("rslt").innerText="הוזן מספר אי זוגי";
+            } // если не четное
+            // console.log('my job 3');
+        }
+        function identify_advance(){
+            let x=document.getElementById("tx1").value;
+            if (x==""){
+                document.getElementById("rslt").innerText="חסר נתון הקלט"
+                document.getElementById("tx1").focus()
+            } // проверка на отсутствие input
+            else if (x != x.trim()) {
+                document.getElementById("rslt").innerText="הזן ערך ללא רווחים"
+                document.getElementById("tx1").focus()
+            } // проверка на наличие пробелов
+            else if (isNaN(x)) {
+                document.getElementById("rslt").innerText="לא הוזן ערך מספרי מתאים"
+                document.getElementById("tx1").focus()
+            }
+            else if (x % 1 == 0) {
+                document.getElementById("rslt").innerText="הוזן מספר שלם";
+            } // если целое
+            else {
+                document.getElementById("rslt").innerText="הוזן מספר עשרוני";
+            } // если десятичное
+            // console.log('my job 4');
+        }
+    </script>
+</body>
+</html>
