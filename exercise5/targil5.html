@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>targil5</title>
+    <script src="targil5.js"></script>
+</head>
+
+<body dir=rtl>
+    יצרן: <input id='tbYatzran'><br>
+    מודל: <input id='tbModel'><br>
+    נפח מנוע: <input type=number id='tbVolume'><br>
+    <br>
+    <button id='btnMakeCar' onclick="MakeCar();">Create Car</button>
+    <script>
+        function MakeCar() {
+            let manufacturer = document.getElementById('tbYatzran').value;
+            let model = document.getElementById('tbModel').value;
+            let engineVolume = document.getElementById('tbVolume').value;
+            engineVolume = parseFloat(engineVolume);
+
+            // Try-catch block for creating the Car object
+            try {
+                let myCar = new Car(manufacturer, model, engineVolume);
+                alert(`Car ${myCar.toString()} fuel consumption is: ${myCar.fuelConsumption()} km per liters.`);
+            } catch (prblm) {
+                alert(`Failed to create the Car object: ${prblm}`);
+            }
+        } // gets input values, converts engine volume to float, checks if input is valid.
+
+    </script>
+</body>
+
+</html>
