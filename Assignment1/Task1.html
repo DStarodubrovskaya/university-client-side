@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Checker</title>
+</head>
+<body>
+    <div>
+        <!-- Input fields for the three sides of the triangle -->
+        <label>AB side (in sm): </label>
+        <input id="AB" type="number" placeholder="Enter length of AB" required>
+        <br><br>
+        <label>BC side (in sm): </label>
+        <input id="BC" type="number" placeholder="Enter length of BC" required>
+        <br><br>
+        <label>AC side (in sm): </label>
+        <input id="AC" type="number" placeholder="Enter length of AC" required>
+        <br><br>
+        <!-- Button to trigger the triangle type and validation checks -->
+        <button type="button" onclick="Discover();">גלה</button>
+        <br><br>
+        <!-- Div to display the result or error messages -->
+        <div id="rslt"></div>
+    </div>
+    <script>
+        function Discover(){
+            // Clears any previous results or error messages
+            document.getElementById('rslt').innerText = "";
+
+            // Reads and parses the input values
+            let ab = parseFloat(document.getElementById('AB').value);
+            let ac = parseFloat(document.getElementById('AC').value);
+            let bc = parseFloat(document.getElementById('BC').value);
+
+            // 1. Validates input: Ensures all values are positive numbers
+            if (isNaN(ab) || ab <= 0 || isNaN(bc) || bc <= 0 || isNaN(ac) || ac <= 0) {
+                document.getElementById('rslt').innerText=
+                "All values must be positive numbers.\nPlease check your inputs.";
+                return; // Exits the function if validation fails
+            }
+
+            // 2. Checks if the values form a triangle using the triangle inequality rule
+            if (!(ab + bc > ac && bc + ac > ab && ac + ab > bc)) {
+                document.getElementById('rslt').innerText=
+                "The 3 values entered do not represent a triangle.\nPlease check your inputs.";
+                return; // Exits the function if the triangle condition is not met
+            }
+
+            // 3. Checks the type of the triangle
+            let triangleType = "";
+            if (ab === bc && bc === ac) 
+            {
+                triangleType = "שווה צלעות";
+            }
+            else if ((ab === bc) || (ab === ac) || (ac === bc))
+            {
+                triangleType = "שווה שוקיים";
+            }
+            else
+            {
+                triangleType = "רגיל";
+            }
+
+            // 4. Checks if the triangle is a right-angled triangle
+            let rightAngled = false;
+            if ((ab * ab + ac * ac) === (bc * bc) ||
+                (ab * ab + bc * bc) === (ac * ac) ||
+                (bc * bc + ac * ac) === (ab * ab))
+            {
+                rightAngled = true;
+            }
+
+            // 5. Constructs the result message
+            let resultMessage = `התקבל משולש ${triangleType}`;
+            if (rightAngled) {
+                resultMessage += " וגם ישר זווית";
+            } else {
+                resultMessage += " ולא ישר זווית";
+            }
+            // 6. Displays the result in the rslt div
+            document.getElementById('rslt').innerText = resultMessage;
+        }
+        
+
+    </script>
+</body>
+</html>

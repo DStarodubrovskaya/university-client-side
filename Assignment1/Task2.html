@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Finder</title>
+    <style>
+        /* CSS class to highlight the string in red */
+        .red {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Input for the string to find -->
+    <label>A string to find: </label>
+    <input id="findString" type="text" placeholder="Please enter a string" required>
+    <br><br>
+    <!-- Textarea for the content to search within -->
+    <label>Where to find: </label>
+    <textarea id="txtArea" placeholder="Enter the text to search in" required></textarea> </textarea>
+    <br><br>
+    <!-- Button to trigger the search -->
+    <button type="button" onclick="Find();">חפש</button>
+    <br><br>
+    <!-- Div to display the result -->
+    <div id="rslt"></div>
+    <script>
+        function Find()
+        {
+            // Clears any previous results or error messages
+            document.getElementById('rslt').innerText = "";
+
+            // Gets the input values
+            let findString = document.getElementById("findString").value.trim();
+            let text = document.getElementById("txtArea").value.trim();
+
+            // 1. Validates input: Ensures both fields are filled
+            if (findString == "" || text == "") {
+                    document.getElementById('rslt').innerText=
+                    "Both fields must have values.\nPlease check your inputs.";
+                    return; // Exits the function if validation fails
+                }
+
+            // 2. Checks if the string exists in the text
+            if (text.indexOf(findString) == -1)
+            {
+                document.getElementById('rslt').innerText = "המילה שחיפשת לא נמצאת בתוך המשפט";
+                return;
+            }
+
+            // 3. Highlights the string in red
+            let idx = 0;
+            let finalText = "";
+            let nextidx = text.indexOf(findString, idx); // Calculates the next occurrence
+
+            while (nextidx != -1)
+            {
+                finalText += text.substring(idx, nextidx);
+                finalText += `<span class="red">${findString}</span>`;
+                idx = nextidx + findString.length; 
+                nextidx = text.indexOf(findString, idx); // Calculates the next occurrence
+            }
+            finalText += text.substring(idx, text.length);
+            
+            // 4. Displays the result in the rslt div
+            document.getElementById('rslt').innerHTML = finalText;
+            
+        }
+
+    </script>
+</body>
+</html>

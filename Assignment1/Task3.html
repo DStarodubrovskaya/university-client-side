@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Sums Divisible by 7</title>
+</head>
+<body>
+    <!-- Div to display the result -->
+    <div id="rslt"></div>
+    <script>
+        // 1. Calculates the sum of the digits of a number
+        function SumDigits(num) 
+        {
+            let sum = 0;
+            while (num > 0) 
+            {
+                sum += num % 10;
+                num = Math.floor(num / 10);
+            }
+            return sum;
+        }
+
+        // 2. Loops through all numbers from 0 to 9999
+        let count = 0;
+        let finalResult = "<ol>";
+        for (let i = 0; i <= 9999; i++)
+        {
+            let sum = SumDigits(i);
+            if (sum % 7 == 0)
+            {
+                finalResult += `<li>${i}</li>`;
+                count ++;
+            }
+        }
+        finalResult += `</ol>`;
+
+        // 3. Adds the summary paragraph
+        finalResult += 
+        `
+        <p>
+            המספרים ברשימה לעיל סכום ספרותיהם מתחלק ב7, הינם בתחום 0 עד 9999 (כולל) , כמות המספרים האלה היא: ${count}
+        </p>
+        `
+        // 4. Displays the result
+        document.getElementById('rslt').innerHTML = finalResult;
+    </script>
+</body>
+</html>
